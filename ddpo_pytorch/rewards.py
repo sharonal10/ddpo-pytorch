@@ -18,7 +18,7 @@ def fm_similarity():
         # metadata = [{'item': item, 'perspective': perspective} for _ in range(num)]
         assert len(images) == len(metadata), (len(images), len(metadata))
 
-        img_paths = [rf'/viscam/projects/langint/sharonal/ddpo-pytorch/ddpo_pytorch/assets/fm_images/{metadata[i]['item']}/{metadata[i]['perspective']}-view.png' for i in range(len(images))]
+        img_paths = [rf'/viscam/projects/langint/sharonal/ddpo-pytorch/ddpo_pytorch/assets/fm_images/{metadata[i]["item"]}/{metadata[i]["perspective"]}-view.png' for i in range(len(images))]
         ref_images = [Image.open(img_path) for img_path in img_paths] 
         ref_images = [_maybe_flip(img, 0.5) for img in ref_images]
         

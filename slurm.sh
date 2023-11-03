@@ -9,7 +9,7 @@
 #SBATCH --nodes=1-1
 #SBATCH --exclude=viscam1,viscam5,viscam7
 
-#SBATCH --job-name="fm_ddpo-11_03"
+#SBATCH --job-name="fm_ddpo-11_03-telephone_word"
 #SBATCH --output=/viscam/u/sharonal/data/sbatch_sweep_out/%A_%a_%j_%x.log
 
 #SBATCH --account=viscam

@@ -10,7 +10,7 @@ def get_config():
     # random seed for reproducibility.
     config.seed = 42
     # top-level logging directory for checkpoint saving.
-    config.logdir = "logs/telephone-word" #change
+    config.logdir = "logs/telephone_word" #change
     # number of epochs to train for. each epoch is one round of sampling from the model followed by training on those
     # samples.
     config.num_epochs = 5000
