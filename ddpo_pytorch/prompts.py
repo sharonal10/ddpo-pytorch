@@ -29,7 +29,7 @@ def from_file(path, low=None, high=None):
 
 def from_perspective(item, perspectives):
     perspective = random.choice(perspectives)
-    return f'a {perspective}-view photo of a {item}', {'item': item, 'perspective': perspective}
+    return f'a {perspective}-view photo of a sks', {'item': item, 'perspective': perspective}
 
 def imagenet_all():
     return from_file("imagenet_classes.txt")
