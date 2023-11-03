@@ -94,7 +94,7 @@ def get_config():
     # prompt function to use. see `prompts.py` for available prompt functions.
     config.prompt_fn = "from_perspective"
     # kwargs to pass to the prompt function.
-    config.prompt_fn_kwargs = {'telephone', ('top', 'side', 'slanted')} # change
+    config.prompt_fn_kwargs = {'item': 'telephone', 'perspectives': ('top', 'side', 'slanted')} # change
 
     ###### Reward Function ######
     # reward function to use. see `rewards.py` for available reward functions.
