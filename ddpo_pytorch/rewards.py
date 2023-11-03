@@ -2,7 +2,7 @@ from PIL import Image
 import io
 import numpy as np
 import torch
-from ffa_crop_feat import FFACropFeat
+from ddpo_pytorch.ffa_crop_feat import FFACropFeat
 
 
 def fm_similarity():
