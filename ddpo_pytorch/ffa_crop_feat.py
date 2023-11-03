@@ -93,9 +93,9 @@ class FFACropFeat(torch.nn.Module):
             b = self.forward_single(x[1])
             # print('b', b.shape, b)
             assert len(a) == len(b), (len(a), len(b))
-            res = [torch.cosine_similarity(a[i], b[i], dim=0) for i in range(len(a))] 
+            res = [torch.cosine_similarity(a[i], b[i], dim=0).cpu().item() for i in range(len(a))] 
             print(res)
-            return torch.stack(res, dim=0).cpu()
+            return res
         
             # res = torch.cosine_similarity(self.forward_single(x[0]), self.forward_single(x[1]), dim=0)
             # print(res)
