@@ -27,7 +27,7 @@ def fm_similarity():
             images = (images * 255).round().clamp(0, 255).to(torch.uint8).cpu().numpy()
             images = images.transpose(0, 2, 3, 1)  # NCHW -> NHWC
         pil_images = [Image.fromarray(image) for image in images]
-        scores = [fm(ref_images, pil_images)] 
+        scores = fm(ref_images, pil_images)
         return np.array(scores) * 10, {} # maybe need to scale them up? I think LLaVA is 1-10
 
     return _fn
