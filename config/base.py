@@ -10,14 +10,14 @@ def get_config():
     # random seed for reproducibility.
     config.seed = 42
     # top-level logging directory for checkpoint saving.
-    config.logdir = "logs"
+    config.logdir = "logs/telephone-word" #change
     # number of epochs to train for. each epoch is one round of sampling from the model followed by training on those
     # samples.
-    config.num_epochs = 100
+    config.num_epochs = 5000
     # number of epochs between saving model checkpoints.
-    config.save_freq = 2
+    config.save_freq = 200
     # number of checkpoints to keep before overwriting old ones.
-    config.num_checkpoint_limit = 5
+    config.num_checkpoint_limit = 10000 # don't overwrite
     # mixed precision training. options are "fp16", "bf16", and "no". half-precision speeds up training significantly.
     config.mixed_precision = "fp16"
     # allow tf32 on Ampere GPUs, which can speed up training.
@@ -50,7 +50,7 @@ def get_config():
     # classifier-free guidance weight. 1.0 is no guidance.
     sample.guidance_scale = 5.0
     # batch size (per GPU!) to use for sampling.
-    sample.batch_size = 1
+    sample.batch_size = 4
     # number of batches to sample per epoch. the total number of samples per epoch is `num_batches_per_epoch *
     # batch_size * num_gpus`.
     sample.num_batches_per_epoch = 2
@@ -58,7 +58,7 @@ def get_config():
     ###### Training ######
     config.train = train = ml_collections.ConfigDict()
     # batch size (per GPU!) to use for training.
-    train.batch_size = 1
+    train.batch_size = 4 # unsure if setting both batch sizes like this without changing anything else is fine, check again when adjusting hyperparams
     # whether to use the 8bit Adam optimizer from bitsandbytes.
     train.use_8bit_adam = False
     # learning rate.
@@ -92,9 +92,9 @@ def get_config():
 
     ###### Prompt Function ######
     # prompt function to use. see `prompts.py` for available prompt functions.
-    config.prompt_fn = "imagenet_animals"
+    config.prompt_fn = "from_perspective"
     # kwargs to pass to the prompt function.
-    config.prompt_fn_kwargs = {}
+    config.prompt_fn_kwargs = {'telephone', ['top', 'side', 'slanted']} # change
 
     ###### Reward Function ######
     # reward function to use. see `rewards.py` for available reward functions.

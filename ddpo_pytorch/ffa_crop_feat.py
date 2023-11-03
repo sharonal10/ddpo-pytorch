@@ -88,7 +88,18 @@ class FFACropFeat(torch.nn.Module):
         elif len(x) == 1:
             return self.forward_single([x[0]])
         elif len(x) == 2: #NOTE: may need to modify to take in multiple images, currently only processes one image from each list
-            return torch.cosine_similarity(self.forward_single(x[0])[0], self.forward_single(x[1])[0], dim=0).cpu().item()
+            a = self.forward_single(x[0])
+            # print('a', a.shape, a)
+            b = self.forward_single(x[1])
+            # print('b', b.shape, b)
+            assert len(a) == len(b), (len(a), len(b))
+            res = [torch.cosine_similarity(a[i], b[i], dim=0) for i in range(len(a))] 
+            print(res)
+            return res
+        
+            # res = torch.cosine_similarity(self.forward_single(x[0]), self.forward_single(x[1]), dim=0)
+            # print(res)
+            # return torch.cosine_similarity(self.forward_single(x[0])[0], self.forward_single(x[1])[0], dim=0).cpu().item()
         else:
             raise ValueError("Invalid number of inputs, only 1 or 2 inputs are supported.")
 
@@ -142,6 +153,8 @@ class FFACropFeat(torch.nn.Module):
 # image_path2 = rf'C:\Users\19255\Downloads\fruit-color\apple-red.jpg'
 # image2 = Image.open(image_path2)
 # print(fm([image1], [image2])) # takes in two lists of images
+
+# print(fm([image1, image0, image2], [image2, image1, image0])) # appears to be deterministic, good
 
 # image3 = Image.open(rf'C:\Users\19255\Downloads\fruit-color\new.jpg')
 

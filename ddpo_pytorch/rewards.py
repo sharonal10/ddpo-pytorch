@@ -8,18 +8,28 @@ from ddpo_pytorch.ffa_crop_feat import FFACropFeat
 def fm_similarity():
     fm = FFACropFeat('cuda')
 
-    image_path1 = rf'/viscam/projects/langint/sharonal/ddpo-pytorch/ddpo_pytorch/assets/ref_image.jpg'
-    ref_images = [Image.open(image_path1)]
+    def _maybe_flip(img, p): # p = chance to flip
+        if np.random.rand() < p:
+            return img.transpose(Image.FLIP_LEFT_RIGHT)
+        else:
+            return img
 
     def _fn(images, prompts, metadata):
+        # metadata = [{'item': item, 'perspective': perspective} for _ in range(num)]
+        assert len(images) == len(metadata), (len(images), len(metadata))
+
+        img_paths = [rf'/viscam/projects/langint/sharonal/ddpo-pytorch/ddpo_pytorch/assets/fm_images/{metadata[i]['item']}/{metadata[i]['perspective']}-view.png' for i in range(len(images))]
+        ref_images = [Image.open(img_path) for img_path in img_paths] 
+        ref_images = [_maybe_flip(img, 0.5) for img in ref_images]
+        
+
         if isinstance(images, torch.Tensor):
             images = (images * 255).round().clamp(0, 255).to(torch.uint8).cpu().numpy()
             images = images.transpose(0, 2, 3, 1)  # NCHW -> NHWC
         pil_images = [Image.fromarray(image) for image in images]
         assert len(pil_images) == 1, len(pil_images)
-        scores = [fm(ref_images, pil_images)] # scores is just a single number for now, when we make it take multiple images we may change it to a tensor that should be converted to np array
-        print(scores)
-        return np.array(scores), {}
+        scores = [fm(ref_images, pil_images)] 
+        return np.array(scores) * 10, {} # maybe need to scale them up? I think LLaVA is 1-10
 
     return _fn
 

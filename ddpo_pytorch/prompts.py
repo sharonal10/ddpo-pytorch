@@ -27,6 +27,9 @@ def from_file(path, low=None, high=None):
     prompts = _load_lines(path)[low:high]
     return random.choice(prompts), {}
 
+def from_perspective(item, perspectives):
+    perspective = random.choice(perspectives)
+    return f'a {perspective}-view photo of a {item}', {'item': item, 'perspective': perspective}
 
 def imagenet_all():
     return from_file("imagenet_classes.txt")
