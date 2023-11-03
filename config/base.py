@@ -15,7 +15,7 @@ def get_config():
     # samples.
     config.num_epochs = 100
     # number of epochs between saving model checkpoints.
-    config.save_freq = 20
+    config.save_freq = 2
     # number of checkpoints to keep before overwriting old ones.
     config.num_checkpoint_limit = 5
     # mixed precision training. options are "fp16", "bf16", and "no". half-precision speeds up training significantly.
@@ -25,8 +25,8 @@ def get_config():
     # resume training from a checkpoint. either an exact checkpoint directory (e.g. checkpoint_50), or a directory
     # containing checkpoints, in which case the latest one will be used. `config.use_lora` must be set to the same value
     # as the run that generated the saved checkpoint.
-    # config.resume_from = ""
-    config.resume_from = "/viscam/projects/langint/sharonal/ddpo-pytorch/ddpo_pytorch/assets/105000.ckpt"
+    config.resume_from = ""
+    # config.resume_from = "/viscam/projects/langint/sharonal/ddpo-pytorch/ddpo_pytorch/assets/105000.ckpt"
     # whether or not to use LoRA. LoRA reduces memory usage significantly by injecting small weight matrices into the
     # attention layers of the UNet. with LoRA, fp16, and a batch size of 1, finetuning Stable Diffusion should take
     # about 10GB of GPU memory. beware that if LoRA is disabled, training will take a lot of memory and saved checkpoint
