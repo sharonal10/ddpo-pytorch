@@ -347,6 +347,7 @@ def main(_):
         samples = {k: torch.cat([s[k] for s in samples]) for k in samples[0].keys()}
 
         print([prompt for prompt in prompts])
+        print([(reward, type(reward)) for reward in rewards])
 
         # this is a hack to force wandb to log the images as JPEGs instead of PNGs
         with tempfile.TemporaryDirectory() as tmpdir:
