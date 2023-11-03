@@ -346,6 +346,8 @@ def main(_):
         # collate samples into dict where each entry has shape (num_batches_per_epoch * sample.batch_size, ...)
         samples = {k: torch.cat([s[k] for s in samples]) for k in samples[0].keys()}
 
+        print([prompt for prompt in prompts])
+
         # this is a hack to force wandb to log the images as JPEGs instead of PNGs
         with tempfile.TemporaryDirectory() as tmpdir:
             for i, image in enumerate(images):
