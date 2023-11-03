@@ -2,7 +2,25 @@ from PIL import Image
 import io
 import numpy as np
 import torch
+from ffa_crop_feat import FFACropFeat
 
+
+def fm_similarity():
+    fm = FFACropFeat('cuda')
+
+    image_path1 = rf'C:\Users\19255\Downloads\fruit-color\strawberry-red.jpg'
+    ref_images = [Image.open(image_path1)]
+
+    def _fn(images, prompts, metadata):
+        if isinstance(images, torch.Tensor):
+            images = (images * 255).round().clamp(0, 255).to(torch.uint8).cpu().numpy()
+            images = images.transpose(0, 2, 3, 1)  # NCHW -> NHWC
+        pil_images = [Image.fromarray(image) for image in images]
+        assert len(pil_images) == 1, len(pil_images)
+        scores = fm(ref_images, pil_images)
+        return scores, {}
+
+    return _fn
 
 def jpeg_incompressibility():
     def _fn(images, prompts, metadata):
