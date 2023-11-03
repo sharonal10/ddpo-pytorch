@@ -17,7 +17,8 @@ def fm_similarity():
             images = images.transpose(0, 2, 3, 1)  # NCHW -> NHWC
         pil_images = [Image.fromarray(image) for image in images]
         assert len(pil_images) == 1, len(pil_images)
-        scores = fm(ref_images, pil_images) # scores is just a single number for now, when we make it take multiple images we may change it to a tensor that should be converted to np array
+        scores = [fm(ref_images, pil_images)] # scores is just a single number for now, when we make it take multiple images we may change it to a tensor that should be converted to np array
+        print(scores)
         return np.array(scores), {}
 
     return _fn
