@@ -8,6 +8,7 @@ import numpy as np
 from torchvision import models
 from torchvision.transforms import functional as F
 import torchvision.transforms as transforms
+import matplotlib.pyplot as plt
 
 
 class FFACropFeat(torch.nn.Module):
@@ -113,14 +114,14 @@ class FFACropFeat(torch.nn.Module):
             preprocessed_imgs = self.preprocess(img_list)
             masks = self.get_foreground_mask(preprocessed_imgs)
 
-            import matplotlib.pyplot as plt
-            plt.subplot(1, 3, 1)
-            plt.imshow(masks[0][0].detach().cpu().numpy())
-            plt.subplot(1, 3, 2)
-            plt.imshow(img_list[0])
-            plt.subplot(1, 3, 3)
-            plt.imshow(x_list[0])
-            plt.show()
+            
+            # plt.subplot(1, 3, 1)
+            # plt.imshow(masks[0][0].detach().cpu().numpy())
+            # plt.subplot(1, 3, 2)
+            # plt.imshow(img_list[0])
+            # plt.subplot(1, 3, 3)
+            # plt.imshow(x_list[0])
+            # plt.show()
             # plt.savefig("mask_demo.png")
             # exit()
 
