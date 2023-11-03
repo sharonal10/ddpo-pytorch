@@ -8,7 +8,7 @@ from ddpo_pytorch.ffa_crop_feat import FFACropFeat
 def fm_similarity():
     fm = FFACropFeat('cuda')
 
-    image_path1 = rf'C:\Users\19255\Downloads\fruit-color\strawberry-red.jpg'
+    image_path1 = rf'/viscam/projects/langint/sharonal/ddpo-pytorch/ddpo_pytorch/assets/ref_image.jpg'
     ref_images = [Image.open(image_path1)]
 
     def _fn(images, prompts, metadata):
