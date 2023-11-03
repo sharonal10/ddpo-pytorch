@@ -10,7 +10,7 @@ def get_config():
     # random seed for reproducibility.
     config.seed = 42
     # top-level logging directory for checkpoint saving.
-    config.logdir = "logs/plane-word" #change
+    config.logdir = "logs/chair-word" #change
     # number of epochs to train for. each epoch is one round of sampling from the model followed by training on those
     # samples.
     config.num_epochs = 5000
@@ -94,7 +94,7 @@ def get_config():
     # prompt function to use. see `prompts.py` for available prompt functions.
     config.prompt_fn = "from_perspective"
     # kwargs to pass to the prompt function.
-    config.prompt_fn_kwargs = {'item': 'plane', 'perspectives': ('top', 'side', 'front')} # change
+    config.prompt_fn_kwargs = {'item': 'chair', 'perspectives': ('slanted', 'side', 'back')} # change
 
     ###### Reward Function ######
     # reward function to use. see `rewards.py` for available reward functions.
