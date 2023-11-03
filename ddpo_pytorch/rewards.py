@@ -28,7 +28,7 @@ def fm_similarity():
             images = images.transpose(0, 2, 3, 1)  # NCHW -> NHWC
         pil_images = [Image.fromarray(image) for image in images]
         scores = fm(ref_images, pil_images)
-        return np.array(scores) * 10, {} # maybe need to scale them up? I think LLaVA is 1-10
+        return np.array(scores), {} # maybe need to scale them up? I think LLaVA is 1-10
 
     return _fn
 
